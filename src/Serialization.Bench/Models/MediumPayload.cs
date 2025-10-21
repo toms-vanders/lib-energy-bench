@@ -1,97 +1,310 @@
-namespace Serialization.Bench.Models;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
+namespace Serialization.Bench.Models;
 public class MediumPayload
 {
-    public int OrderId { get; set; }
-    public string OrderNumber { get; set; }
-    public DateTime OrderDate { get; set; }
-    public OrderStatus Status { get; set; }
-    public Customer Customer { get; set; }
-    public List<OrderItem> Items { get; set; }
-    public ShippingAddress ShippingAddress { get; set; }
-    public decimal SubTotal { get; set; }
-    public decimal Tax { get; set; }
-    public decimal ShippingCost { get; set; }
-    public decimal TotalAmount { get; set; }
-    public string Notes { get; set; }
-    
-    public static MediumPayload CreateSample()
+    public int id { get; set; }
+    public string node_id { get; set; }
+    public string name { get; set; }
+    public string full_name { get; set; }
+    [JsonPropertyName("private")]
+    public bool is_private { get; set; }
+    public Owner owner { get; set; }
+    public string html_url { get; set; }
+    public string description { get; set; }
+    public bool fork { get; set; }
+    public string url { get; set; }
+    public string forks_url { get; set; }
+    public string keys_url { get; set; }
+    public string collaborators_url { get; set; }
+    public string teams_url { get; set; }
+    public string hooks_url { get; set; }
+    public string issue_events_url { get; set; }
+    public string events_url { get; set; }
+    public string assignees_url { get; set; }
+    public string branches_url { get; set; }
+    public string tags_url { get; set; }
+    public string blobs_url { get; set; }
+    public string git_tags_url { get; set; }
+    public string git_refs_url { get; set; }
+    public string trees_url { get; set; }
+    public string statuses_url { get; set; }
+    public string languages_url { get; set; }
+    public string stargazers_url { get; set; }
+    public string contributors_url { get; set; }
+    public string subscribers_url { get; set; }
+    public string subscription_url { get; set; }
+    public string commits_url { get; set; }
+    public string git_commits_url { get; set; }
+    public string comments_url { get; set; }
+    public string issue_comment_url { get; set; }
+    public string contents_url { get; set; }
+    public string compare_url { get; set; }
+    public string merges_url { get; set; }
+    public string archive_url { get; set; }
+    public string downloads_url { get; set; }
+    public string issues_url { get; set; }
+    public string pulls_url { get; set; }
+    public string milestones_url { get; set; }
+    public string notifications_url { get; set; }
+    public string labels_url { get; set; }
+    public string releases_url { get; set; }
+    public string deployments_url { get; set; }
+    public string created_at { get; set; }
+    public string updated_at { get; set; }
+    public string pushed_at { get; set; }
+    public string git_url { get; set; }
+    public string ssh_url { get; set; }
+    public string clone_url { get; set; }
+    public string svn_url { get; set; }
+    public string homepage { get; set; }
+    public int size { get; set; }
+    public int stargazers_count { get; set; }
+    public int watchers_count { get; set; }
+    public string language { get; set; }
+    public bool has_issues { get; set; }
+    public bool has_projects { get; set; }
+    public bool has_downloads { get; set; }
+    public bool has_wiki { get; set; }
+    public bool has_pages { get; set; }
+    public bool has_discussions { get; set; }
+    public int forks_count { get; set; }
+    public object mirror_url { get; set; }
+    public bool archived { get; set; }
+    public bool disabled { get; set; }
+    public int open_issues_count { get; set; }
+    public License license { get; set; }
+    public bool allow_forking { get; set; }
+    public bool is_template { get; set; }
+    public bool web_commit_signoff_required { get; set; }
+    public object[] topics { get; set; }
+    public string visibility { get; set; }
+    public int forks { get; set; }
+    public int open_issues { get; set; }
+    public int watchers { get; set; }
+    public string default_branch { get; set; }
+    public Permissions permissions { get; set; }
+    public string temp_clone_token { get; set; }
+    public Parent parent { get; set; }
+    public Source source { get; set; }
+    public int network_count { get; set; }
+    public int subscribers_count { get; set; }
+
+    public static MediumPayload CreateSampleFromFile()
     {
-        return new MediumPayload
-        {
-            OrderId = 98765,
-            OrderNumber = "ORD-2024-001234",
-            OrderDate = DateTime.UtcNow,
-            Status = OrderStatus.Processing,
-            Customer = new Customer
-            {
-                CustomerId = 5001,
-                Name = "Jane Smith",
-                Email = "jane.smith@example.com",
-                Phone = "+1-555-0199",
-                LoyaltyPoints = 1250
-            },
-            Items = Enumerable.Range(1, 15).Select(i => new OrderItem
-            {
-                ItemId = i,
-                ProductName = $"Product {i}",
-                SKU = $"SKU-{i:D5}",
-                Quantity = i % 3 + 1,
-                UnitPrice = 19.99m + i,
-                Discount = i % 4 == 0 ? 5.0m : 0,
-                TotalPrice = (19.99m + i) * (i % 3 + 1)
-            }).ToList(),
-            ShippingAddress = new ShippingAddress
-            {
-                Street = "123 Main Street",
-                City = "Springfield",
-                State = "IL",
-                ZipCode = "62701",
-                Country = "USA"
-            },
-            SubTotal = 450.85m,
-            Tax = 40.58m,
-            ShippingCost = 12.99m,
-            TotalAmount = 504.42m,
-            Notes = "Please deliver between 9 AM and 5 PM. Leave package at door if not home."
-        };
+        var json = File.ReadAllBytes("data/json/medium-github-repo.json");
+
+        return JsonSerializer.Deserialize<MediumPayload>(json)
+               ?? throw new InvalidOperationException("Failed to parse sample JSON.");
     }
 }
 
-public class Customer
+public class Owner
 {
-    public int CustomerId { get; set; }
-    public string Name { get; set; }
-    public string Email { get; set; }
-    public string Phone { get; set; }
-    public int LoyaltyPoints { get; set; }
+    public string login { get; set; }
+    public int id { get; set; }
+    public string node_id { get; set; }
+    public string avatar_url { get; set; }
+    public string gravatar_id { get; set; }
+    public string url { get; set; }
+    public string html_url { get; set; }
+    public string followers_url { get; set; }
+    public string following_url { get; set; }
+    public string gists_url { get; set; }
+    public string starred_url { get; set; }
+    public string subscriptions_url { get; set; }
+    public string organizations_url { get; set; }
+    public string repos_url { get; set; }
+    public string events_url { get; set; }
+    public string received_events_url { get; set; }
+    public string type { get; set; }
+    public string user_view_type { get; set; }
+    public bool site_admin { get; set; }
 }
 
-public class OrderItem
+public class License
 {
-    public int ItemId { get; set; }
-    public string ProductName { get; set; }
-    public string SKU { get; set; }
-    public int Quantity { get; set; }
-    public decimal UnitPrice { get; set; }
-    public decimal Discount { get; set; }
-    public decimal TotalPrice { get; set; }
+    public string key { get; set; }
+    public string name { get; set; }
+    public string spdx_id { get; set; }
+    public string url { get; set; }
+    public string node_id { get; set; }
 }
 
-public class ShippingAddress
+public class Permissions
 {
-    public string Street { get; set; }
-    public string City { get; set; }
-    public string State { get; set; }
-    public string ZipCode { get; set; }
-    public string Country { get; set; }
+    public bool admin { get; set; }
+    public bool maintain { get; set; }
+    public bool push { get; set; }
+    public bool triage { get; set; }
+    public bool pull { get; set; }
 }
 
-public enum OrderStatus
+public class Parent
 {
-    Pending,
-    Processing,
-    Shipped,
-    Delivered,
-    Cancelled
+    public int id { get; set; }
+    public string node_id { get; set; }
+    public string name { get; set; }
+    public string full_name { get; set; }
+    [JsonPropertyName("private")]
+    public bool is_private { get; set; }
+    public Owner owner { get; set; }
+    public string html_url { get; set; }
+    public string description { get; set; }
+    public bool fork { get; set; }
+    public string url { get; set; }
+    public string forks_url { get; set; }
+    public string keys_url { get; set; }
+    public string collaborators_url { get; set; }
+    public string teams_url { get; set; }
+    public string hooks_url { get; set; }
+    public string issue_events_url { get; set; }
+    public string events_url { get; set; }
+    public string assignees_url { get; set; }
+    public string branches_url { get; set; }
+    public string tags_url { get; set; }
+    public string blobs_url { get; set; }
+    public string git_tags_url { get; set; }
+    public string git_refs_url { get; set; }
+    public string trees_url { get; set; }
+    public string statuses_url { get; set; }
+    public string languages_url { get; set; }
+    public string stargazers_url { get; set; }
+    public string contributors_url { get; set; }
+    public string subscribers_url { get; set; }
+    public string subscription_url { get; set; }
+    public string commits_url { get; set; }
+    public string git_commits_url { get; set; }
+    public string comments_url { get; set; }
+    public string issue_comment_url { get; set; }
+    public string contents_url { get; set; }
+    public string compare_url { get; set; }
+    public string merges_url { get; set; }
+    public string archive_url { get; set; }
+    public string downloads_url { get; set; }
+    public string issues_url { get; set; }
+    public string pulls_url { get; set; }
+    public string milestones_url { get; set; }
+    public string notifications_url { get; set; }
+    public string labels_url { get; set; }
+    public string releases_url { get; set; }
+    public string deployments_url { get; set; }
+    public string created_at { get; set; }
+    public string updated_at { get; set; }
+    public string pushed_at { get; set; }
+    public string git_url { get; set; }
+    public string ssh_url { get; set; }
+    public string clone_url { get; set; }
+    public string svn_url { get; set; }
+    public string homepage { get; set; }
+    public int size { get; set; }
+    public int stargazers_count { get; set; }
+    public int watchers_count { get; set; }
+    public string language { get; set; }
+    public bool has_issues { get; set; }
+    public bool has_projects { get; set; }
+    public bool has_downloads { get; set; }
+    public bool has_wiki { get; set; }
+    public bool has_pages { get; set; }
+    public bool has_discussions { get; set; }
+    public int forks_count { get; set; }
+    public object mirror_url { get; set; }
+    public bool archived { get; set; }
+    public bool disabled { get; set; }
+    public int open_issues_count { get; set; }
+    public License license { get; set; }
+    public bool allow_forking { get; set; }
+    public bool is_template { get; set; }
+    public bool web_commit_signoff_required { get; set; }
+    public string[] topics { get; set; }
+    public string visibility { get; set; }
+    public int forks { get; set; }
+    public int open_issues { get; set; }
+    public int watchers { get; set; }
+    public string default_branch { get; set; }
+}
+
+public class Source
+{
+    public int id { get; set; }
+    public string node_id { get; set; }
+    public string name { get; set; }
+    public string full_name { get; set; }
+    [JsonPropertyName("private")]
+    public bool is_private { get; set; }
+    public Owner owner { get; set; }
+    public string html_url { get; set; }
+    public string description { get; set; }
+    public bool fork { get; set; }
+    public string url { get; set; }
+    public string forks_url { get; set; }
+    public string keys_url { get; set; }
+    public string collaborators_url { get; set; }
+    public string teams_url { get; set; }
+    public string hooks_url { get; set; }
+    public string issue_events_url { get; set; }
+    public string events_url { get; set; }
+    public string assignees_url { get; set; }
+    public string branches_url { get; set; }
+    public string tags_url { get; set; }
+    public string blobs_url { get; set; }
+    public string git_tags_url { get; set; }
+    public string git_refs_url { get; set; }
+    public string trees_url { get; set; }
+    public string statuses_url { get; set; }
+    public string languages_url { get; set; }
+    public string stargazers_url { get; set; }
+    public string contributors_url { get; set; }
+    public string subscribers_url { get; set; }
+    public string subscription_url { get; set; }
+    public string commits_url { get; set; }
+    public string git_commits_url { get; set; }
+    public string comments_url { get; set; }
+    public string issue_comment_url { get; set; }
+    public string contents_url { get; set; }
+    public string compare_url { get; set; }
+    public string merges_url { get; set; }
+    public string archive_url { get; set; }
+    public string downloads_url { get; set; }
+    public string issues_url { get; set; }
+    public string pulls_url { get; set; }
+    public string milestones_url { get; set; }
+    public string notifications_url { get; set; }
+    public string labels_url { get; set; }
+    public string releases_url { get; set; }
+    public string deployments_url { get; set; }
+    public string created_at { get; set; }
+    public string updated_at { get; set; }
+    public string pushed_at { get; set; }
+    public string git_url { get; set; }
+    public string ssh_url { get; set; }
+    public string clone_url { get; set; }
+    public string svn_url { get; set; }
+    public string homepage { get; set; }
+    public int size { get; set; }
+    public int stargazers_count { get; set; }
+    public int watchers_count { get; set; }
+    public string language { get; set; }
+    public bool has_issues { get; set; }
+    public bool has_projects { get; set; }
+    public bool has_downloads { get; set; }
+    public bool has_wiki { get; set; }
+    public bool has_pages { get; set; }
+    public bool has_discussions { get; set; }
+    public int forks_count { get; set; }
+    public object mirror_url { get; set; }
+    public bool archived { get; set; }
+    public bool disabled { get; set; }
+    public int open_issues_count { get; set; }
+    public License license { get; set; }
+    public bool allow_forking { get; set; }
+    public bool is_template { get; set; }
+    public bool web_commit_signoff_required { get; set; }
+    public string[] topics { get; set; }
+    public string visibility { get; set; }
+    public int forks { get; set; }
+    public int open_issues { get; set; }
+    public int watchers { get; set; }
+    public string default_branch { get; set; }
 }

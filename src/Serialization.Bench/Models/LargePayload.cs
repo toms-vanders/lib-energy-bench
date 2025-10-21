@@ -1,104 +1,231 @@
-namespace Serialization.Bench.Models;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+
+namespace Serialization.Bench.Models.Large;
 
 public class LargePayload
 {
-    public int CatalogId { get; set; }
-    public string CatalogName { get; set; }
-    public DateTime GeneratedAt { get; set; }
-    public List<Product> Products { get; set; }
-    public CatalogMetadata Metadata { get; set; }
+    public Meta meta { get; set; }
+    public object[][] data { get; set; }
     
-    public static LargePayload CreateSample()
+    public static LargePayload CreateSampleFromFile()
     {
-        return new LargePayload
-        {
-            CatalogId = 2024,
-            CatalogName = "Electronics Catalog Q1 2024",
-            GeneratedAt = DateTime.UtcNow,
-            Products = Enumerable.Range(1, 50).Select(i => new Product
-            {
-                ProductId = i,
-                Name = $"Product {i}",
-                Description = $"This is a detailed description for product {i}. It includes multiple features, specifications, and benefits that make it an excellent choice for customers. The product has been designed with quality and performance in mind.",
-                Category = i % 4 == 0 ? "Electronics" : i % 4 == 1 ? "Accessories" : i % 4 == 2 ? "Software" : "Hardware",
-                Price = 99.99m + (i * 10),
-                StockQuantity = 100 + i,
-                Manufacturer = $"Manufacturer {i % 10}",
-                SKU = $"PROD-{i:D6}",
-                Tags = new List<string> { $"tag{i}", $"category{i % 5}", "featured" },
-                Specifications = new Dictionary<string, string>
-                {
-                    { "Weight", $"{i * 0.5}kg" },
-                    { "Dimensions", $"{i}x{i}x{i}cm" },
-                    { "Color", i % 2 == 0 ? "Black" : "Silver" },
-                    { "Warranty", "2 years" }
-                },
-                Reviews = Enumerable.Range(1, 5).Select(r => new Review
-                {
-                    ReviewId = i * 100 + r,
-                    Rating = 3 + (r % 3),
-                    Title = $"Review title {r}",
-                    Comment = $"This is review comment {r} for product {i}. The product quality is good and meets expectations. Would recommend to others.",
-                    ReviewerName = $"User{r}",
-                    ReviewDate = DateTime.UtcNow.AddDays(-r * 10)
-                }).ToList(),
-                Images = Enumerable.Range(1, 4).Select(img => new ProductImage
-                {
-                    ImageId = i * 10 + img,
-                    Url = $"https://example.com/images/product-{i}-{img}.jpg",
-                    AltText = $"Product {i} image {img}",
-                    IsPrimary = img == 1
-                }).ToList()
-            }).ToList(),
-            Metadata = new CatalogMetadata
-            {
-                TotalProducts = 50,
-                TotalCategories = 4,
-                LastUpdated = DateTime.UtcNow,
-                Version = "1.0.0"
-            }
-        };
+        var json = File.ReadAllBytes("data/json/large-nasa-comets.json");
+
+        return JsonSerializer.Deserialize<LargePayload>(json)
+               ?? throw new InvalidOperationException("Failed to parse sample JSON.");
     }
 }
 
-public class Product
+public class Meta
 {
-    public int ProductId { get; set; }
-    public string Name { get; set; }
-    public string Description { get; set; }
-    public string Category { get; set; }
-    public decimal Price { get; set; }
-    public int StockQuantity { get; set; }
-    public string Manufacturer { get; set; }
-    public string SKU { get; set; }
-    public List<string> Tags { get; set; }
-    public Dictionary<string, string> Specifications { get; set; }
-    public List<Review> Reviews { get; set; }
-    public List<ProductImage> Images { get; set; }
+    public View view { get; set; }
 }
 
-public class Review
+public class View
 {
-    public int ReviewId { get; set; }
-    public int Rating { get; set; }
-    public string Title { get; set; }
-    public string Comment { get; set; }
-    public string ReviewerName { get; set; }
-    public DateTime ReviewDate { get; set; }
+    public string id { get; set; }
+    public string name { get; set; }
+    public string assetType { get; set; }
+    public string attribution { get; set; }
+    public string attributionLink { get; set; }
+    public int averageRating { get; set; }
+    public string category { get; set; }
+    public int createdAt { get; set; }
+    public string description { get; set; }
+    public bool diciBackend { get; set; }
+    public string displayType { get; set; }
+    public int downloadCount { get; set; }
+    public bool hideFromCatalog { get; set; }
+    public bool hideFromDataJson { get; set; }
+    public int indexUpdatedAt { get; set; }
+    public bool locked { get; set; }
+    public bool newBackend { get; set; }
+    public int numberOfComments { get; set; }
+    public int oid { get; set; }
+    public string provenance { get; set; }
+    public bool publicationAppendEnabled { get; set; }
+    public int publicationDate { get; set; }
+    public int publicationGroup { get; set; }
+    public string publicationStage { get; set; }
+    public string rowClass { get; set; }
+    public int rowsUpdatedAt { get; set; }
+    public string rowsUpdatedBy { get; set; }
+    public int tableId { get; set; }
+    public int totalTimesRated { get; set; }
+    public int viewCount { get; set; }
+    public int viewLastModified { get; set; }
+    public string viewType { get; set; }
+    public Approvals[] approvals { get; set; }
+    public ClientContext clientContext { get; set; }
+    public Columns[] columns { get; set; }
+    public Grants[] grants { get; set; }
+    public Metadata metadata { get; set; }
+    public Owner owner { get; set; }
+    public Query query { get; set; }
+    public Ratings ratings { get; set; }
+    public string[] rights { get; set; }
+    public TableAuthor tableAuthor { get; set; }
+    public string[] tags { get; set; }
+    public string[] flags { get; set; }
 }
 
-public class ProductImage
+public class Approvals
 {
-    public int ImageId { get; set; }
-    public string Url { get; set; }
-    public string AltText { get; set; }
-    public bool IsPrimary { get; set; }
+    public int reviewedAt { get; set; }
+    public bool reviewedAutomatically { get; set; }
+    public string state { get; set; }
+    public int submissionId { get; set; }
+    public string submissionObject { get; set; }
+    public string submissionOutcome { get; set; }
+    public int submittedAt { get; set; }
+    public string targetAudience { get; set; }
+    public int workflowId { get; set; }
+    public SubmissionDetails submissionDetails { get; set; }
+    public SubmissionOutcomeApplication submissionOutcomeApplication { get; set; }
+    public Submitter submitter { get; set; }
 }
 
-public class CatalogMetadata
+public class SubmissionDetails
 {
-    public int TotalProducts { get; set; }
-    public int TotalCategories { get; set; }
-    public DateTime LastUpdated { get; set; }
-    public string Version { get; set; }
+    public string permissionType { get; set; }
 }
+
+public class SubmissionOutcomeApplication
+{
+    public int failureCount { get; set; }
+    public string status { get; set; }
+}
+
+public class Submitter
+{
+    public string id { get; set; }
+    public string displayName { get; set; }
+}
+
+public class ClientContext
+{
+    public object[] clientContextVariables { get; set; }
+    public InheritedVariables inheritedVariables { get; set; }
+}
+
+public class InheritedVariables
+{
+
+}
+
+public class Columns
+{
+    public int id { get; set; }
+    public string name { get; set; }
+    public string dataTypeName { get; set; }
+    public string fieldName { get; set; }
+    public int position { get; set; }
+    public string renderTypeName { get; set; }
+    public Format format { get; set; }
+    public string[] flags { get; set; }
+    public int tableColumnId { get; set; }
+    public int width { get; set; }
+    public CachedContents cachedContents { get; set; }
+}
+
+public class Format
+{
+    public string align { get; set; }
+}
+
+public class CachedContents
+{
+    public string non_null { get; set; }
+    public string largest { get; set; }
+    [JsonPropertyName("null")]
+    public string is_null { get; set; }
+    public Top[] top { get; set; }
+    public string smallest { get; set; }
+    public string count { get; set; }
+    public string cardinality { get; set; }
+    public string average { get; set; }
+    public string sum { get; set; }
+}
+
+public class Top
+{
+    public string item { get; set; }
+    public string count { get; set; }
+}
+
+public class Grants
+{
+    public bool inherited { get; set; }
+    public string type { get; set; }
+    public string[] flags { get; set; }
+}
+
+public class Metadata
+{
+    public string rdfSubject { get; set; }
+    public string rdfClass { get; set; }
+    public Custom_fields custom_fields { get; set; }
+    public string rowIdentifier { get; set; }
+    public string[] availableDisplayTypes { get; set; }
+    public string rowLabel { get; set; }
+    public RenderTypeConfig renderTypeConfig { get; set; }
+}
+
+public class Custom_fields
+{
+    public Common_Core Common_Core { get; set; }
+}
+
+public class Common_Core
+{
+    public string Program_Code { get; set; }
+    public string[] Bureau_Code { get; set; }
+}
+
+public class RenderTypeConfig
+{
+    public Visible visible { get; set; }
+}
+
+public class Visible
+{
+    public bool table { get; set; }
+}
+
+public class Owner
+{
+    public string id { get; set; }
+    public int disabledAt { get; set; }
+    public string displayName { get; set; }
+    public string profileImageUrlLarge { get; set; }
+    public string profileImageUrlMedium { get; set; }
+    public string profileImageUrlSmall { get; set; }
+    public string screenName { get; set; }
+    public string type { get; set; }
+    public string[] flags { get; set; }
+}
+
+public class Query
+{
+
+}
+
+public class Ratings
+{
+    public int rating { get; set; }
+}
+
+public class TableAuthor
+{
+    public string id { get; set; }
+    public int disabledAt { get; set; }
+    public string displayName { get; set; }
+    public string profileImageUrlLarge { get; set; }
+    public string profileImageUrlMedium { get; set; }
+    public string profileImageUrlSmall { get; set; }
+    public string screenName { get; set; }
+    public string type { get; set; }
+    public string[] flags { get; set; }
+}
+

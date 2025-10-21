@@ -1,11 +1,12 @@
 using BenchmarkDotNet.Attributes;
 using Newtonsoft.Json;
 using Serialization.Bench.Models;
+using Serialization.Bench.Models.Large;
 
 namespace Serialization.Bench;
 
 [MemoryDiagnoser]
-[DisassemblyDiagnoser]
+// [DisassemblyDiagnoser]
 public class JsonSerializationBenchmarks
 {
     private SmallPayload _smallPayload;
@@ -16,9 +17,10 @@ public class JsonSerializationBenchmarks
     [GlobalSetup]
     public void Setup()
     {
-        _smallPayload = SmallPayload.CreateSample();
-        _mediumPayload = MediumPayload.CreateSample();
-        _largePayload = LargePayload.CreateSample();
+        var path = Path.Combine(AppContext.BaseDirectory, "small-github-user.json");
+        _smallPayload = SmallPayload.CreateSampleFromFile(path);
+        // _mediumPayload = MediumPayload.CreateSampleFromFile();
+        // _largePayload = LargePayload.CreateSampleFromFile();
 
         // _smallJson = System.Text.Json.JsonSerializer.Serialize(_smallPayload);
     }

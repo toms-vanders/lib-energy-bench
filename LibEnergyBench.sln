@@ -11,7 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Cat.Serialization", "Cat.Se
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serialization.Bench", "src\Serialization.Bench\Serialization.Bench.csproj", "{E8C81693-AE14-46D5-A98A-62DA2C7A09D4}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{E56842B1-79B9-46BF-AC13-E1CBF555531B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "tests\UnitTests\UnitTests.csproj", "{AA3AE801-7519-4D33-A42A-8A88B983EEBC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,6 +30,10 @@ Global
 		{E8C81693-AE14-46D5-A98A-62DA2C7A09D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E8C81693-AE14-46D5-A98A-62DA2C7A09D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E8C81693-AE14-46D5-A98A-62DA2C7A09D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA3AE801-7519-4D33-A42A-8A88B983EEBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA3AE801-7519-4D33-A42A-8A88B983EEBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA3AE801-7519-4D33-A42A-8A88B983EEBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA3AE801-7519-4D33-A42A-8A88B983EEBC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{E9540E5F-103F-4323-88B3-A73A6145EC46} = {5EDF9DAE-DD62-485F-A117-F3E84D23E9AF}
