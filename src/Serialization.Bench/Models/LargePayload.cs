@@ -1,4 +1,3 @@
-using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Serialization.Bench.Models.Large;
@@ -7,14 +6,6 @@ public class LargePayload
 {
     public Meta meta { get; set; }
     public object[][] data { get; set; }
-    
-    public static LargePayload CreateSampleFromFile()
-    {
-        var json = File.ReadAllBytes("data/json/large-nasa-comets.json");
-
-        return JsonSerializer.Deserialize<LargePayload>(json)
-               ?? throw new InvalidOperationException("Failed to parse sample JSON.");
-    }
 }
 
 public class Meta

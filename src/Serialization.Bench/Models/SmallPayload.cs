@@ -1,5 +1,3 @@
-using System.Text.Json;
-
 namespace Serialization.Bench.Models;
 public class SmallPayload
 {
@@ -36,14 +34,5 @@ public class SmallPayload
     public int following { get; set; }
     public string created_at { get; set; }
     public string updated_at { get; set; }
-
-    public static SmallPayload CreateSampleFromFile(string path)
-    {
-        var json = File.ReadAllBytes(path);
-
-        var smallPayload = JsonSerializer.Deserialize<SmallPayload>(json) 
-                           ?? throw new InvalidOperationException("Failed to parse sample JSON.");
-        return smallPayload;
-    }
 }
 

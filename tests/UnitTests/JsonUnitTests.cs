@@ -1,3 +1,4 @@
+using Serialization.Bench.Helpers;
 using Serialization.Bench.Models;
 
 namespace UnitTests;
@@ -9,8 +10,7 @@ public class JsonUnitTests
     [Fact]
     public void SmallPayloadTest()
     {
-        var path = Path.Combine(AppContext.BaseDirectory, "small-github-user.json");
-        _smallPayload = SmallPayload.CreateSampleFromFile(path);
+        _smallPayload = SerializationHelper.CreateSampleFromFile<SmallPayload>("small-github-user.json");
         
         Assert.NotNull(_smallPayload);
     }

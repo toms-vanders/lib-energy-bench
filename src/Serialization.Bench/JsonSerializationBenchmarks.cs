@@ -1,5 +1,6 @@
 using BenchmarkDotNet.Attributes;
 using Newtonsoft.Json;
+using Serialization.Bench.Helpers;
 using Serialization.Bench.Models;
 using Serialization.Bench.Models.Large;
 
@@ -17,10 +18,9 @@ public class JsonSerializationBenchmarks
     [GlobalSetup]
     public void Setup()
     {
-        var path = Path.Combine(AppContext.BaseDirectory, "small-github-user.json");
-        _smallPayload = SmallPayload.CreateSampleFromFile(path);
-        // _mediumPayload = MediumPayload.CreateSampleFromFile();
-        // _largePayload = LargePayload.CreateSampleFromFile();
+        _smallPayload = SerializationHelper.CreateSampleFromFile<SmallPayload>("small-github-user.json");
+        _mediumPayload = SerializationHelper.CreateSampleFromFile<MediumPayload>("medium-github-repo.json");
+        _largePayload = SerializationHelper.CreateSampleFromFile<LargePayload>("large-nasa-comets.json");
 
         // _smallJson = System.Text.Json.JsonSerializer.Serialize(_smallPayload);
     }

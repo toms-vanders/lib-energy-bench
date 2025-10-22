@@ -12,10 +12,5 @@
       <PackageReference Include="BenchmarkDotNet.Annotations" Version="0.15.4" />
       <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
     </ItemGroup>
-
-    <ItemGroup>
-        <None Include="../../data/json/**">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </None>
-    </ItemGroup>
+    
 </Project>

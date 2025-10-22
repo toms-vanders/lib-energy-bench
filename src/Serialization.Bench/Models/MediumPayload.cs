@@ -1,4 +1,3 @@
-using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace Serialization.Bench.Models;
@@ -90,14 +89,6 @@ public class MediumPayload
     public Source source { get; set; }
     public int network_count { get; set; }
     public int subscribers_count { get; set; }
-
-    public static MediumPayload CreateSampleFromFile()
-    {
-        var json = File.ReadAllBytes("data/json/medium-github-repo.json");
-
-        return JsonSerializer.Deserialize<MediumPayload>(json)
-               ?? throw new InvalidOperationException("Failed to parse sample JSON.");
-    }
 }
 
 public class Owner
