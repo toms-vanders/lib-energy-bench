@@ -1,4 +1,5 @@
 using BenchmarkDotNet.Attributes;
+using BenchmarkDotNet.Mathematics;
 using Jil;
 using Newtonsoft.Json;
 using Serialization.Bench.Helpers;
@@ -7,8 +8,8 @@ using Serialization.Bench.Models.Large;
 
 namespace Serialization.Bench;
 
-[MemoryDiagnoser]
 // [DisassemblyDiagnoser]
+[Config(typeof(BenchConfig))]
 public class JsonSerializationBenchmarks
 {
     private SmallPayload _smallPayload;
@@ -26,7 +27,7 @@ public class JsonSerializationBenchmarks
         // _smallJson = System.Text.Json.JsonSerializer.Serialize(_smallPayload);
     }
 
-    [Benchmark]
+    [Benchmark(Baseline = true)]
     public string SystemTextJson_Serialize_Small()
     {
         return System.Text.Json.JsonSerializer.Serialize(_smallPayload);
@@ -37,24 +38,24 @@ public class JsonSerializationBenchmarks
     {
         return JsonConvert.SerializeObject(_smallPayload);
     }
-
-    [Benchmark]
-    public string Jil_Serialize_Small()
-    {
-        return JSON.Serialize(_smallPayload);
-    }
-
-    [Benchmark]
-    public string Utf8Json_Serialize_Small()
-    {
-        return Utf8Json.JsonSerializer.ToJsonString(_smallPayload);
-    }
-
-    [Benchmark]
-    public string SpanJson_Serialize_Small()
-    {
-        return SpanJson.JsonSerializer.Generic.Utf16.Serialize(_smallPayload);
-    }
+    //
+    // [Benchmark]
+    // public string Jil_Serialize_Small()
+    // {
+    //     return JSON.Serialize(_smallPayload);
+    // }
+    //
+    // [Benchmark]
+    // public string Utf8Json_Serialize_Small()
+    // {
+    //     return Utf8Json.JsonSerializer.ToJsonString(_smallPayload);
+    // }
+    //
+    // [Benchmark]
+    // public string SpanJson_Serialize_Small()
+    // {
+    //     return SpanJson.JsonSerializer.Generic.Utf16.Serialize(_smallPayload);
+    // }
     // [Benchmark]
     // public string SystemTextJson_Serialize_Medium()
     // {

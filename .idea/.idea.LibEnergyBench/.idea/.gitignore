@@ -15,3 +15,12 @@
 # .NET build output (anywhere)
 **/bin/
 **/obj/
+
+# BenchmarkDotNet artifacts & plots
+**/BenchmarkArtifacts/
+**/BenchmarkDotNet.Artifacts/
+**/*-report*.{md,html,csv,json}
+**/*-measurements.csv
+**/*.R
+**/*.png
+**/*.log

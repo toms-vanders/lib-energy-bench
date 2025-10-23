@@ -10,6 +10,9 @@ public static class SerializationHelper
     
     public static string FilePath(string fileName)
         => Path.Combine(Path.GetDirectoryName(WhereAmI()), "..", "data", "json", fileName);
+    
+    public static string ResultPath()
+        => Path.Combine(Path.GetDirectoryName(WhereAmI()), "..", "BenchmarkArtifacts");
 
     public static T CreateSampleFromFile<T>(string fileName)
     {
