@@ -5,6 +5,7 @@ using BenchmarkDotNet.Exporters;
 using BenchmarkDotNet.Exporters.Csv;
 using BenchmarkDotNet.Exporters.Json;
 using BenchmarkDotNet.Jobs;
+using BenchmarkDotNet.Order;
 using Perfolizer.Horology;
 using Serialization.Bench.Columns;
 using Serialization.Bench.Helpers;
@@ -22,7 +23,7 @@ public class BenchConfig : ManualConfig
         WithArtifactsPath(SerializationHelper.ResultPath());
         
         AddLogicalGroupRules(BenchmarkLogicalGroupRule.ByCategory);
-        
+        WithOrderer(new DefaultOrderer(SummaryOrderPolicy.FastestToSlowest));
         AddDiagnoser(MemoryDiagnoser.Default);
         
         AddColumn(RankColumn.Arabic);
