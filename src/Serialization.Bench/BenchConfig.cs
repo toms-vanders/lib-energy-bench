@@ -21,6 +21,8 @@ public class BenchConfig : ManualConfig
         
         WithArtifactsPath(SerializationHelper.ResultPath());
         
+        AddLogicalGroupRules(BenchmarkLogicalGroupRule.ByCategory);
+        
         AddDiagnoser(MemoryDiagnoser.Default);
         
         AddColumn(RankColumn.Arabic);
