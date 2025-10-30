@@ -24,7 +24,8 @@ public class BenchConfig : ManualConfig
         
         AddLogicalGroupRules(BenchmarkLogicalGroupRule.ByCategory);
         WithOrderer(new DefaultOrderer(SummaryOrderPolicy.FastestToSlowest));
-        AddDiagnoser(MemoryDiagnoser.Default);
+        //AddDiagnoser(MemoryDiagnoser.Default);
+        AddDiagnoser(EnergyDiagnoser.Default);
         
         AddColumn(RankColumn.Arabic);
         AddColumn(StatisticColumn.Iterations);

@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serialization.Bench", "src\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "tests\UnitTests\UnitTests.csproj", "{AA3AE801-7519-4D33-A42A-8A88B983EEBC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BenchmarkDotNet", "..\BenchmarkDotNet.Energy\src\BenchmarkDotNet\BenchmarkDotNet.csproj", "{D00353C4-B62F-4E37-8006-C976F07A494D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -34,6 +36,10 @@ Global
 		{AA3AE801-7519-4D33-A42A-8A88B983EEBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AA3AE801-7519-4D33-A42A-8A88B983EEBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AA3AE801-7519-4D33-A42A-8A88B983EEBC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D00353C4-B62F-4E37-8006-C976F07A494D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D00353C4-B62F-4E37-8006-C976F07A494D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D00353C4-B62F-4E37-8006-C976F07A494D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D00353C4-B62F-4E37-8006-C976F07A494D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{E9540E5F-103F-4323-88B3-A73A6145EC46} = {5EDF9DAE-DD62-485F-A117-F3E84D23E9AF}
