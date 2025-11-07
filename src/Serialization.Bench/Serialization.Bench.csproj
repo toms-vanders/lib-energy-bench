@@ -7,11 +7,6 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
-    <PropertyGroup>
-        <!-- Disable strongname warning as that's not been enforced since .net 5.-->
-        <NoWarn>$(NoWarn);CS8002</NoWarn>
-    </PropertyGroup>
-
     <ItemGroup>
      <!-- <PackageReference Include="BenchmarkDotNet" Version="0.15.4" />
       <PackageReference Include="BenchmarkDotNet.Annotations" Version="0.15.4" />-->
