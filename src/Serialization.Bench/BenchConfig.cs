@@ -17,8 +17,13 @@ public class BenchConfig : ManualConfig
     public BenchConfig()
     {
         AddJob(Job.Default
-                .WithIterationTime(TimeInterval.Second)
-        );
+            .WithId("Energy-1s")
+            .WithIterationTime(TimeInterval.Second));
+        
+        // for sanity check. Should be around 2x energy
+        // AddJob(Job.Default
+        //     .WithId("Energy-2s")
+        //     .WithIterationTime(TimeInterval.FromSeconds(2)));
         
         WithArtifactsPath(SerializationHelper.ResultPath());
         
