@@ -6,7 +6,7 @@ public class CommunityProfile
     public string description { get; set; }
     public string documentation { get; set; }
     public CommunityFiles files { get; set; }
-    public DateTimeOffset? updated_at { get; set; }
+    public string? updated_at { get; set; }
     public bool content_reports_enabled { get; set; }
 }
 

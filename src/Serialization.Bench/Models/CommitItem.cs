@@ -34,7 +34,7 @@ public class GitUser
 {
     public string name { get; set; }
     public string email { get; set; }
-    public DateTimeOffset date { get; set; }
+    public string date { get; set; }
 }
 
 public class Tree

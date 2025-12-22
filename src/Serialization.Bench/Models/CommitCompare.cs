@@ -58,7 +58,7 @@ public class CompareGitUser
 {
     public string name { get; set; }
     public string email { get; set; }
-    public DateTimeOffset date { get; set; }
+    public string date { get; set; }
 }
 
 public class CompareTree
@@ -75,7 +75,7 @@ public class CompareVerification
     public string? payload { get; set; }
     public string? signature { get; set; }
 
-    public DateTimeOffset? verified_at { get; set; }
+    public string? verified_at { get; set; }
 }
 
 public class CompareSimpleUser
