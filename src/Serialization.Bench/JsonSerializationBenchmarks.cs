@@ -11,9 +11,9 @@ namespace Serialization.Bench;
 [Config(typeof(BenchConfig))]
 public class JsonSerializationBenchmarks
 {
-    private SmallPayload _smallPayload;
-    private MediumPayload _mediumPayload;
-    private LargePayload _largePayload;
+    private CommunityProfile _smallPayload;
+    private CommitItem _mediumPayload;
+    private CommitCompare _largePayload;
     private string _smallJson;
     private string _mediumJson;
     private string _largeJson;
@@ -21,9 +21,9 @@ public class JsonSerializationBenchmarks
     [GlobalSetup]
     public void Setup()
     {
-        _smallPayload = SerializationHelper.CreateSampleFromFile<SmallPayload>("small-github-user.json");
-        _mediumPayload = SerializationHelper.CreateSampleFromFile<MediumPayload>("medium-github-repo.json");
-        _largePayload = SerializationHelper.CreateSampleFromFile<LargePayload>("large-nasa-comets.json");
+        _smallPayload = SerializationHelper.CreateSampleFromFile<CommunityProfile>("small-profile.json");
+        _mediumPayload = SerializationHelper.CreateSampleFromFile<CommitItem>("medium-commit.json");
+        _largePayload = SerializationHelper.CreateSampleFromFile<CommitCompare>("large-compare.json");
 
         _smallJson = System.Text.Json.JsonSerializer.Serialize(_smallPayload);
         _mediumJson = System.Text.Json.JsonSerializer.Serialize(_mediumPayload);
@@ -95,64 +95,64 @@ public class JsonSerializationBenchmarks
     
         // ===== Deserialize · Small =====
     [Benchmark(Baseline = true), BenchmarkCategory("Deserialize", "Small")]
-    public SmallPayload STJ_Deserialize_Small() =>
-        System.Text.Json.JsonSerializer.Deserialize<SmallPayload>(_smallJson);
+    public CommunityProfile STJ_Deserialize_Small() =>
+        System.Text.Json.JsonSerializer.Deserialize<CommunityProfile>(_smallJson);
     
     [Benchmark, BenchmarkCategory("Deserialize", "Small")]
-    public SmallPayload Newtonsoft_Deserialize_Small() =>
-        JsonConvert.DeserializeObject<SmallPayload>(_smallJson);
+    public CommunityProfile Newtonsoft_Deserialize_Small() =>
+        JsonConvert.DeserializeObject<CommunityProfile>(_smallJson);
     
     [Benchmark, BenchmarkCategory("Deserialize", "Small")]
-    public SmallPayload Jil_Deserialize_Small() =>
-        JSON.Deserialize<SmallPayload>(_smallJson);
+    public CommunityProfile Jil_Deserialize_Small() =>
+        JSON.Deserialize<CommunityProfile>(_smallJson);
     
     [Benchmark, BenchmarkCategory("Deserialize", "Small")]
-    public SmallPayload Utf8Json_Deserialize_Small() =>
-        Utf8Json.JsonSerializer.Deserialize<SmallPayload>(_smallJson);
+    public CommunityProfile Utf8Json_Deserialize_Small() =>
+        Utf8Json.JsonSerializer.Deserialize<CommunityProfile>(_smallJson);
     
     [Benchmark, BenchmarkCategory("Deserialize", "Small")]
-    public SmallPayload SpanJson_Deserialize_Small() =>
-        SpanJson.JsonSerializer.Generic.Utf16.Deserialize<SmallPayload>(_smallJson);
+    public CommunityProfile SpanJson_Deserialize_Small() =>
+        SpanJson.JsonSerializer.Generic.Utf16.Deserialize<CommunityProfile>(_smallJson);
     
     // ===== Deserialize · Medium =====
     [Benchmark(Baseline = true), BenchmarkCategory("Deserialize", "Medium")]
-    public MediumPayload STJ_Deserialize_Medium() =>
-        System.Text.Json.JsonSerializer.Deserialize<MediumPayload>(_mediumJson);
+    public CommitItem STJ_Deserialize_Medium() =>
+        System.Text.Json.JsonSerializer.Deserialize<CommitItem>(_mediumJson);
     
     [Benchmark, BenchmarkCategory("Deserialize", "Medium")]
-    public MediumPayload Newtonsoft_Deserialize_Medium() =>
-        JsonConvert.DeserializeObject<MediumPayload>(_mediumJson);
+    public CommitItem Newtonsoft_Deserialize_Medium() =>
+        JsonConvert.DeserializeObject<CommitItem>(_mediumJson);
     
     [Benchmark, BenchmarkCategory("Deserialize", "Medium")]
-    public MediumPayload Jil_Deserialize_Medium() =>
-        JSON.Deserialize<MediumPayload>(_mediumJson);
+    public CommitItem Jil_Deserialize_Medium() =>
+        JSON.Deserialize<CommitItem>(_mediumJson);
     
     [Benchmark, BenchmarkCategory("Deserialize", "Medium")]
-    public MediumPayload Utf8Json_Deserialize_Medium() =>
-        Utf8Json.JsonSerializer.Deserialize<MediumPayload>(_mediumJson);
+    public CommitItem Utf8Json_Deserialize_Medium() =>
+        Utf8Json.JsonSerializer.Deserialize<CommitItem>(_mediumJson);
     
     [Benchmark, BenchmarkCategory("Deserialize", "Medium")]
-    public MediumPayload SpanJson_Deserialize_Medium() =>
-        SpanJson.JsonSerializer.Generic.Utf16.Deserialize<MediumPayload>(_mediumJson);
+    public CommitItem SpanJson_Deserialize_Medium() =>
+        SpanJson.JsonSerializer.Generic.Utf16.Deserialize<CommitItem>(_mediumJson);
     
     // ===== Deserialize · Large =====
     [Benchmark(Baseline = true), BenchmarkCategory("Deserialize", "Large")]
-    public LargePayload STJ_Deserialize_Large() =>
-        System.Text.Json.JsonSerializer.Deserialize<LargePayload>(_largeJson);
+    public CommitCompare STJ_Deserialize_Large() =>
+        System.Text.Json.JsonSerializer.Deserialize<CommitCompare>(_largeJson);
     
     [Benchmark, BenchmarkCategory("Deserialize", "Large")]
-    public LargePayload Newtonsoft_Deserialize_Large() =>
-        JsonConvert.DeserializeObject<LargePayload>(_largeJson);
+    public CommitCompare Newtonsoft_Deserialize_Large() =>
+        JsonConvert.DeserializeObject<CommitCompare>(_largeJson);
     
     [Benchmark, BenchmarkCategory("Deserialize", "Large")]
-    public LargePayload Jil_Deserialize_Large() =>
-        JSON.Deserialize<LargePayload>(_largeJson);
+    public CommitCompare Jil_Deserialize_Large() =>
+        JSON.Deserialize<CommitCompare>(_largeJson);
     
     [Benchmark, BenchmarkCategory("Deserialize", "Large")]
-    public LargePayload Utf8Json_Deserialize_Large() =>
-        Utf8Json.JsonSerializer.Deserialize<LargePayload>(_largeJson);
+    public CommitCompare Utf8Json_Deserialize_Large() =>
+        Utf8Json.JsonSerializer.Deserialize<CommitCompare>(_largeJson);
     
     [Benchmark, BenchmarkCategory("Deserialize", "Large")]
-    public LargePayload SpanJson_Deserialize_Large() =>
-        SpanJson.JsonSerializer.Generic.Utf16.Deserialize<LargePayload>(_largeJson);
+    public CommitCompare SpanJson_Deserialize_Large() =>
+        SpanJson.JsonSerializer.Generic.Utf16.Deserialize<CommitCompare>(_largeJson);
 }
