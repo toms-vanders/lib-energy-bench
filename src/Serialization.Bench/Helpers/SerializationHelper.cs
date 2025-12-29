@@ -14,12 +14,14 @@ public static class SerializationHelper
     public static string ResultPath()
         => Path.Combine(Path.GetDirectoryName(WhereAmI()), "..", "BenchmarkArtifacts");
 
-    public static T CreateSampleFromFile<T>(string fileName)
+    public static (T Payload, string Json) LoadSample<T>(string fileName)
     {
         var filePath = FilePath(fileName);
-        var json = File.ReadAllBytes(filePath);
-        var payload = JsonSerializer.Deserialize<T>(json) 
-                           ?? throw new InvalidOperationException("Failed to parse sample JSON.");
-        return payload;
+        var json     = File.ReadAllText(filePath);
+    
+        var payload = System.Text.Json.JsonSerializer.Deserialize<T>(json)
+                      ?? throw new InvalidOperationException("Failed to parse sample JSON.");
+
+        return (payload, json);
     }
 }
