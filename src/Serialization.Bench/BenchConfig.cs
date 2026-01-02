@@ -20,11 +20,11 @@ public class BenchConfig : ManualConfig
     {
         AddJob(Job.Default
             .WithId("Energy-1s")
-            .WithIterationTime(TimeInterval.Second)
-            .WithIterationCount(15)
-            .WithWarmupCount(6)
-            .WithOutlierMode(OutlierMode.DontRemove)
-            .WithLaunchCount(1));
+            // .WithIterationCount(15)
+            // .WithWarmupCount(6)
+            // .WithOutlierMode(OutlierMode.DontRemove)
+            .WithIterationTime(TimeInterval.Second));
+
         
         WithArtifactsPath(SerializationHelper.ResultPath());
         WithOptions(ConfigOptions.KeepBenchmarkFiles);
@@ -41,6 +41,5 @@ public class BenchConfig : ManualConfig
 
         
         AddExporter(CsvMeasurementsExporter.Default);
-        AddExporter(MarkdownExporter.GitHub);
     }
 }
