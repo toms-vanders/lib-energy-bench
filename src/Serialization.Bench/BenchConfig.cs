@@ -33,12 +33,9 @@ public class BenchConfig : ManualConfig
         WithOrderer(new DefaultOrderer(SummaryOrderPolicy.FastestToSlowest));
 
         AddDiagnoser(EnergyDiagnoser.Default);
-        
-        AddColumn(RankColumn.Arabic);
+
         AddColumn(StatisticColumn.Iterations);
         AddColumn(new InvocationCountColumn());
-        AddColumn(StatisticalTestColumn.Create("3%"));
-
         
         AddExporter(CsvMeasurementsExporter.Default);
     }
