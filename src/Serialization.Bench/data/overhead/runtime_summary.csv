@@ -1,0 +1,3 @@
+EnergyDiagnoser,n,run_time_mean,run_time_sd,global_time_mean,global_time_sd,run_overhead_pct,run_overhead_ci,run_diff_sec,run_diff_ci_sec,global_overhead_pct,global_overhead_ci,global_diff_sec,global_diff_ci_sec
+Disabled,10,810.451,6.909697613579849,822.232,6.876211489217339,NA,--,NA,--,NA,--,NA,--
+Enabled,10,823.184,9.098635062469537,834.424,9.615309782956658,1.5711005353809209,"[0.45, 2.69]",12.733000000000027,"[3.64, 21.83]",1.4827931775946457,"[0.33, 2.64]",12.192000000000007,"[2.71, 21.67]"

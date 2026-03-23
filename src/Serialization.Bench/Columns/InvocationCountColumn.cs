@@ -24,7 +24,6 @@ public class InvocationCountColumn : IColumn
 
     public string GetValue(Summary summary, BenchmarkCase benchmarkCase, SummaryStyle style)
     {
-        // Pick any Workload/Actual measurement and read its Operations count
         long? ops = summary[benchmarkCase].AllMeasurements
             .Where(m => m.IterationMode == IterationMode.Workload &&
                         m.IterationStage == IterationStage.Actual)

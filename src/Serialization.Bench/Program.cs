@@ -4,4 +4,3 @@ using BenchmarkDotNet.Running;
 using Serialization.Bench;
 
 var summary = BenchmarkRunner.Run<JsonSerializationBenchmarks>();
-

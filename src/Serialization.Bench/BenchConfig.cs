@@ -6,7 +6,9 @@ using BenchmarkDotNet.Exporters.Csv;
 using BenchmarkDotNet.Exporters.Json;
 using BenchmarkDotNet.Jobs;
 using BenchmarkDotNet.Order;
+using BenchmarkDotNet.Toolchains.InProcess.NoEmit;
 using Perfolizer.Horology;
+using Perfolizer.Mathematics.OutlierDetection;
 using Serialization.Bench.Columns;
 using Serialization.Bench.Helpers;
 
@@ -17,21 +19,24 @@ public class BenchConfig : ManualConfig
     public BenchConfig()
     {
         AddJob(Job.Default
-                .WithIterationTime(TimeInterval.Second)
-        );
+            .WithId("Energy-1s")
+            // .WithIterationCount(15)
+            // .WithWarmupCount(6)
+            // .WithOutlierMode(OutlierMode.DontRemove)
+            .WithIterationTime(TimeInterval.Second));
+
         
         WithArtifactsPath(SerializationHelper.ResultPath());
+        WithOptions(ConfigOptions.KeepBenchmarkFiles);
         
         AddLogicalGroupRules(BenchmarkLogicalGroupRule.ByCategory);
         WithOrderer(new DefaultOrderer(SummaryOrderPolicy.FastestToSlowest));
-        AddDiagnoser(MemoryDiagnoser.Default);
-        
-        AddColumn(RankColumn.Arabic);
+
+        AddDiagnoser(EnergyDiagnoser.Default);
+
         AddColumn(StatisticColumn.Iterations);
         AddColumn(new InvocationCountColumn());
-        // Results + plots
-        AddExporter(JsonExporter.Full);
-        AddExporter(CsvMeasurementsExporter.Default);  // required for R plots
-        AddExporter(RPlotExporter.Default);            // generates PNGs via R
+        
+        AddExporter(CsvMeasurementsExporter.Default);
     }
 }
